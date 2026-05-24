@@ -108,7 +108,20 @@ def _imread_pil(filename: str, flags: int = cv2.IMREAD_COLOR) -> np.ndarray | No
         return None
 
 
-def imwrite(filename: str, img: np.ndarray, params: list[int] | None = None) -> bool:
+def imread_unicode(filename: str, flags: int = cv2.IMREAD_COLOR) -> np.ndarray:
+    """Read an image from a file.
+
+    Args:
+        filename (str): Path to the file to read.
+        flags (int, optional): Flag that can take values of cv2.IMREAD_*. Defaults to cv2.IMREAD_COLOR.
+
+    Returns:
+        (np.ndarray): The read image.
+    """
+    return cv2.imdecode(np.fromfile(filename, np.uint8), flags)
+
+
+def imwrite_unicode(filename: str, img: np.ndarray, params: list[int] | None = None) -> bool:
     """Write an image to a file with multilanguage filename support.
 
     Args:
@@ -133,7 +146,7 @@ def imwrite(filename: str, img: np.ndarray, params: list[int] | None = None) -> 
         return False
 
 
-def imshow(winname: str, mat: np.ndarray) -> None:
+def imshow_unicode(winname: str, mat: np.ndarray) -> None:
     """Display an image in the specified window with multilanguage window name support.
 
     This function is a wrapper around OpenCV's imshow function that displays an image in a named window. It handles
